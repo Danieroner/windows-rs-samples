@@ -5,13 +5,14 @@ use windows::{
   Win32::UI::WindowsAndMessaging::*,
 };
 use once_cell::sync::Lazy;
-use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::atomic::AtomicUsize;
+use std::sync::atomic::Ordering;
 use std::sync::{Arc, LockResult, Mutex};
 use std::io::{self, Write};
 use std::thread;
 
-static COUNT: Lazy<Arc<Mutex<AtomicU64>>> =
-  Lazy::new(|| Arc::new(Mutex::new(AtomicU64::new(0))));
+static COUNT: Lazy<Arc<Mutex<AtomicUsize>>> =
+  Lazy::new(|| Arc::new(Mutex::new(AtomicUsize::new(0))));
 
 fn main() -> Result<()> {
   unsafe {
