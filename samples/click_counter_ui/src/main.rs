@@ -8,12 +8,15 @@ use windows::{
   Win32::Graphics::Gdi::*,
 };
 use once_cell::sync::Lazy;
-use std::sync::atomic::{AtomicU64, Ordering};
-use std::sync::{Arc, Mutex, LockResult};
 use std::thread;
+use std::sync::Arc;
+use std::sync::Mutex;
+use std::sync::LockResult;
+use std::sync::atomic::AtomicUsize;
+use std::sync::atomic::Ordering;
 
-static COUNT: Lazy<Arc<Mutex<AtomicU64>>> =
-  Lazy::new(|| Arc::new(Mutex::new(AtomicU64::new(0))));
+static COUNT: Lazy<Arc<Mutex<AtomicUsize>>> =
+  Lazy::new(|| Arc::new(Mutex::new(AtomicUsize::new(0))));
 static HWND_S: Lazy<Arc<Mutex<HWND>>> =
   Lazy::new(|| Arc::new(Mutex::new(HWND::default())));
 
